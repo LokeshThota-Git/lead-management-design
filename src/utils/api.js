@@ -34,6 +34,15 @@ export const postLead = async (lead) => {
       createdAt: new Date().toISOString()
     }
   };
+  // Persist to localStorage so subsequent update/delete operations can find it
+  try {
+    const savedLeadsRaw = localStorage.getItem('leads');
+    const savedLeads = savedLeadsRaw ? JSON.parse(savedLeadsRaw) : [];
+    const updatedLeads = [response.data, ...savedLeads];
+    localStorage.setItem('leads', JSON.stringify(updatedLeads));
+  } catch (_) {
+    // If localStorage is unavailable, we still return success so UI state updates
+  }
 
   return response;
 };
