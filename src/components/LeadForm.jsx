@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaUser, FaEnvelope, FaPhone, FaMessage, FaSpinner } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { postLead } from '../utils/api';
 
 /**
  * LeadForm Component
@@ -81,25 +82,16 @@ export default function LeadForm({ onLeadAdded }) {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await postLead(formData);
       
-      // Simulate occasional API failure (10% chance)
-      if (Math.random() < 0.1) {
-        throw new Error('Network error. Please try again.');
+      if (response.success) {
+        onLeadAdded(response.data);
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        setErrors({});
+        toast.success(response.message);
+      } else {
+        throw new Error(response.message || 'Failed to add lead');
       }
-
-      const newLead = {
-        id: Date.now().toString(),
-        ...formData,
-        status: 'New',
-        createdAt: new Date().toISOString()
-      };
-
-      onLeadAdded(newLead);
-      setFormData({ name: '', email: '', phone: '', message: '' });
-      setErrors({});
-      toast.success('Lead added successfully!');
       
     } catch (error) {
       toast.error(error.message);

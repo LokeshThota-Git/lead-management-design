@@ -2,27 +2,43 @@ import { useState, useEffect } from 'react';
 import LeadForm from '../components/LeadForm';
 import LeadList from '../components/LeadList';
 import { FaPlus, FaList } from 'react-icons/fa';
+import { fetchLeads } from '../utils/api';
+import { toast } from 'react-toastify';
 
 export default function LeadsPage() {
   const [activeTab, setActiveTab] = useState('form');
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Load leads from localStorage on component mount
+  // Load leads from API on component mount
   useEffect(() => {
-    const savedLeads = localStorage.getItem('leads');
-    if (savedLeads) {
-      setLeads(JSON.parse(savedLeads));
-    }
+    loadLeads();
   }, []);
 
-  // Save leads to localStorage whenever leads state changes
-  useEffect(() => {
-    localStorage.setItem('leads', JSON.stringify(leads));
-  }, [leads]);
+  const loadLeads = async () => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetchLeads();
+      if (response.success) {
+        setLeads(response.data.leads);
+      } else {
+        throw new Error('Failed to load leads');
+      }
+    } catch (err) {
+      setError(err.message);
+      toast.error(`Failed to load leads: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLeadAdded = (newLead) => {
     setLeads(prev => [newLead, ...prev]);
+    // Switch to list view to show the new lead
+    setActiveTab('list');
   };
 
   const handleLeadUpdated = (updatedLead) => {
@@ -33,6 +49,10 @@ export default function LeadsPage() {
 
   const handleLeadDeleted = (leadId) => {
     setLeads(prev => prev.filter(lead => lead.id !== leadId));
+  };
+
+  const handleRetry = () => {
+    loadLeads();
   };
 
   return (
@@ -87,7 +107,23 @@ export default function LeadsPage() {
 
           {/* Content Area */}
           <div className="min-h-[600px]">
-            {activeTab === 'form' ? (
+            {error ? (
+              <div className="flex flex-col items-center justify-center h-64">
+                <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center max-w-md">
+                  <div className="text-red-600 text-4xl mb-4">⚠️</div>
+                  <h3 className="text-lg font-semibold text-red-800 mb-2">
+                    Failed to Load Leads
+                  </h3>
+                  <p className="text-red-600 mb-4">{error}</p>
+                  <button
+                    onClick={handleRetry}
+                    className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                  >
+                    Try Again
+                  </button>
+                </div>
+              </div>
+            ) : activeTab === 'form' ? (
               <LeadForm onLeadAdded={handleLeadAdded} />
             ) : (
               <LeadList 

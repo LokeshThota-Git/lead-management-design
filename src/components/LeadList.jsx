@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { FaSearch, FaSort, FaSortUp, FaSortDown, FaCheckCircle, FaTrash, FaExpand, FaCompress } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { updateLead, deleteLead } from '../utils/api';
 import EmptyState from './EmptyState';
 
 /**
@@ -75,31 +76,32 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
 
   const handleStatusUpdate = async (leadId) => {
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await updateLead(leadId, { status: 'Contacted' });
       
-      const updatedLead = leads.find(lead => lead.id === leadId);
-      if (updatedLead) {
-        onLeadUpdated({
-          ...updatedLead,
-          status: 'Contacted'
-        });
-        toast.success('Lead status updated successfully!');
+      if (response.success) {
+        onLeadUpdated(response.data);
+        toast.success(response.message);
+      } else {
+        throw new Error(response.message || 'Failed to update lead status');
       }
     } catch (error) {
-      toast.error('Failed to update lead status');
+      toast.error(error.message);
     }
   };
 
   const handleDelete = async (leadId) => {
     if (window.confirm('Are you sure you want to delete this lead?')) {
       try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        onLeadDeleted(leadId);
-        toast.success('Lead deleted successfully!');
+        const response = await deleteLead(leadId);
+        
+        if (response.success) {
+          onLeadDeleted(leadId);
+          toast.success(response.message);
+        } else {
+          throw new Error(response.message || 'Failed to delete lead');
+        }
       } catch (error) {
-        toast.error('Failed to delete lead');
+        toast.error(error.message);
       }
     }
   };
