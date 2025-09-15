@@ -101,7 +101,7 @@ export default function LeadForm({ onLeadAdded }) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto animate-fade-in">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">Add New Lead</h2>
         <p className="text-gray-600">Capture potential customer information</p>
@@ -120,7 +120,7 @@ export default function LeadForm({ onLeadAdded }) {
             value={formData.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 ${
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${
               errors.name ? 'border-red-300' : 'border-white/10'
             }`}
             placeholder="Enter full name"
@@ -142,7 +142,7 @@ export default function LeadForm({ onLeadAdded }) {
             value={formData.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 ${
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${
               errors.email ? 'border-red-300' : 'border-white/10'
             }`}
             placeholder="Enter email address"
@@ -164,7 +164,7 @@ export default function LeadForm({ onLeadAdded }) {
             value={formData.phone}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 ${
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${
               errors.phone ? 'border-red-300' : 'border-white/10'
             }`}
             placeholder="Enter phone number (7-15 digits)"
@@ -186,7 +186,7 @@ export default function LeadForm({ onLeadAdded }) {
             onChange={handleChange}
             onBlur={handleBlur}
             rows={4}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 resize-none ${
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring resize-none ${
               errors.message ? 'border-red-300' : 'border-white/10'
             }`}
             placeholder="Enter any additional message or notes"

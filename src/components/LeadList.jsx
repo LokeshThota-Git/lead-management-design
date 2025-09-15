@@ -3,6 +3,7 @@ import { FaSearch, FaSort, FaSortUp, FaSortDown, FaCheckCircle, FaTrash, FaExpan
 import { toast } from 'react-toastify';
 import { updateLead, deleteLead } from '../utils/api';
 import EmptyState from './EmptyState';
+import LoadingSkeleton from './LoadingSkeleton';
 
 /**
  * LeadList Component
@@ -112,11 +113,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
   };
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    );
+    return <LoadingSkeleton type="table" count={5} />;
   }
 
   if (leads.length === 0) {
@@ -124,7 +121,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       {/* Search and Stats */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div className="relative flex-1 max-w-md">
@@ -134,7 +131,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
             placeholder="Search leads..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-white/6 backdrop-blur-sm border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            className="w-full pl-10 pr-4 py-2 bg-white/6 backdrop-blur-sm border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus-ring transition-all duration-200"
           />
         </div>
         <div className="text-sm text-gray-600">
@@ -187,8 +184,8 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {filteredAndSortedLeads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-white/5 transition-colors">
+              {filteredAndSortedLeads.map((lead, index) => (
+                <tr key={lead.id} className="hover:bg-white/5 transition-all duration-200 hover:scale-[1.01]" style={{ animationDelay: `${index * 0.1}s` }}>
                   <td className="px-6 py-4 text-sm text-gray-900 font-medium">
                     {lead.name}
                   </td>
@@ -281,8 +278,8 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
 
       {/* Mobile Card View */}
       <div className="lg:hidden space-y-4">
-        {filteredAndSortedLeads.map((lead) => (
-          <div key={lead.id} className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+        {filteredAndSortedLeads.map((lead, index) => (
+          <div key={lead.id} className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-200 hover:scale-[1.02] animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
             <div className="flex justify-between items-start mb-3">
               <div>
                 <h3 className="font-semibold text-gray-900">{lead.name}</h3>
