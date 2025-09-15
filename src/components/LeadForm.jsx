@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaUser, FaEnvelope, FaPhone, FaMessage, FaSpinner } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaRegCommentDots, FaSpinner } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { postLead } from '../utils/api';
 
@@ -177,7 +177,7 @@ export default function LeadForm({ onLeadAdded }) {
         {/* Message Field */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            <FaMessage className="inline mr-2" />
+            <FaRegCommentDots className="inline mr-2" />
             Message (Optional)
           </label>
           <textarea
