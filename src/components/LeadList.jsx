@@ -77,11 +77,13 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
 
   const handleStatusUpdate = async (leadId) => {
     try {
-      const response = await updateLead(leadId, { status: 'Contacted' });
+      const current = leads.find(l => l.id === leadId);
+      const nextStatus = current?.status === 'Contacted' ? 'New' : 'Contacted';
+      const response = await updateLead(leadId, { status: nextStatus });
       
       if (response.success) {
         onLeadUpdated(response.data);
-        toast.success(response.message);
+        toast.success(`Status set to ${nextStatus}`);
       } else {
         throw new Error(response.message || 'Failed to update lead status');
       }
@@ -250,13 +252,12 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                     <div className="flex items-center justify-center gap-2">
                       <button
                         onClick={() => handleStatusUpdate(lead.id)}
-                        disabled={lead.status === 'Contacted'}
                         className={`p-2 rounded-lg transition-colors ${
                           lead.status === 'New'
                             ? 'text-green-600 hover:bg-green-100'
-                            : 'text-gray-400 cursor-not-allowed'
+                            : 'text-blue-600 hover:bg-blue-100'
                         }`}
-                        title="Mark as Contacted"
+                        title={lead.status === 'New' ? 'Mark as Contacted' : 'Mark as New'}
                       >
                         <FaCheckCircle size={16} />
                       </button>
@@ -329,15 +330,14 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
             <div className="flex gap-2">
               <button
                 onClick={() => handleStatusUpdate(lead.id)}
-                disabled={lead.status === 'Contacted'}
                 className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
                   lead.status === 'New'
                     ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
                 }`}
               >
                 <FaCheckCircle className="inline mr-1" />
-                Mark Contacted
+                {lead.status === 'New' ? 'Mark Contacted' : 'Mark New'}
               </button>
               <button
                 onClick={() => handleDelete(lead.id)}
