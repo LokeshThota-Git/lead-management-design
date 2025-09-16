@@ -20,6 +20,15 @@ export default function LeadForm() {
       newErrors.phone = "Phone must be 10 digits";
       toast.error("Phone number must be 10 digits")
     }
+    if (!formData.name?.trim()) {
+      newErrors.name = "Name is required";
+    }
+    if (!formData.email?.trim()) {
+      newErrors.email = "Email is required";
+    }
+    if (!formData.feedback?.trim()) {
+      newErrors.feedback = "Feedback is required";
+    }
     return newErrors;
   };
 
@@ -104,6 +113,9 @@ export default function LeadForm() {
               required
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            {errors.name && (
+              <p className="text-sm text-red-600 mt-1">{errors.name}</p>
+            )}
 
             <input
               type="email"
@@ -114,6 +126,9 @@ export default function LeadForm() {
               required
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            {errors.email && (
+              <p className="text-sm text-red-600 mt-1">{errors.email}</p>
+            )}
 
             <input
               type="text"
@@ -124,6 +139,9 @@ export default function LeadForm() {
               required
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            {errors.phone && (
+              <p className="text-sm text-red-600 mt-1">{errors.phone}</p>
+            )}
 
             <textarea
               name="feedback"
@@ -134,6 +152,9 @@ export default function LeadForm() {
               rows="4"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             ></textarea>
+            {errors.feedback && (
+              <p className="text-sm text-red-600 mt-1">{errors.feedback}</p>
+            )}
 
             <button
               type="submit"
