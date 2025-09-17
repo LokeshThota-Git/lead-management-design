@@ -80,7 +80,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
       const current = leads.find(l => l.id === leadId);
       const nextStatus = current?.status === 'Contacted' ? 'New' : 'Contacted';
       const response = await updateLead(leadId, { status: nextStatus });
-      
+
       if (response.success) {
         onLeadUpdated(response.data);
         toast.success(`Status set to ${nextStatus}`);
@@ -96,7 +96,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
     if (window.confirm('Are you sure you want to delete this lead?')) {
       try {
         const response = await deleteLead(leadId);
-        
+
         if (response.success) {
           onLeadDeleted(leadId);
           toast.success(response.message);
@@ -147,7 +147,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
           <table className="w-full">
             <thead className="bg-white/10">
               <tr>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-sm font-medium text-gray-700 cursor-pointer hover:bg-white/20 transition-colors"
                   onClick={() => handleSort('name')}
                 >
@@ -155,7 +155,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                     Name {getSortIcon('name')}
                   </div>
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-sm font-medium text-gray-700 cursor-pointer hover:bg-white/20 transition-colors"
                   onClick={() => handleSort('email')}
                 >
@@ -172,7 +172,7 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                 <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">
                   Status
                 </th>
-                <th 
+                <th
                   className="px-6 py-4 text-left text-sm font-medium text-gray-700 cursor-pointer hover:bg-white/20 transition-colors"
                   onClick={() => handleSort('createdAt')}
                 >
@@ -202,8 +202,8 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                       {lead.message ? (
                         <div>
                           <p className="truncate">
-                            {lead.message.length > 50 
-                              ? `${lead.message.substring(0, 50)}...` 
+                            {lead.message.length > 50
+                              ? `${lead.message.substring(0, 50)}...`
                               : lead.message
                             }
                           </p>
@@ -237,11 +237,10 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full ${
-                      lead.status === 'New'
+                    <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full ${lead.status === 'New'
                         ? 'bg-yellow-100 text-yellow-800'
                         : 'bg-green-100 text-green-800'
-                    }`}>
+                      }`}>
                       {lead.status}
                     </span>
                   </td>
@@ -252,11 +251,10 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                     <div className="flex items-center justify-center gap-2">
                       <button
                         onClick={() => handleStatusUpdate(lead.id)}
-                        className={`p-2 rounded-lg transition-colors ${
-                          lead.status === 'New'
+                        className={`p-2 rounded-lg transition-colors ${lead.status === 'New'
                             ? 'text-green-600 hover:bg-green-100'
                             : 'text-blue-600 hover:bg-blue-100'
-                        }`}
+                          }`}
                         title={lead.status === 'New' ? 'Mark as Contacted' : 'Mark as New'}
                       >
                         <FaCheckCircle size={16} />
@@ -287,11 +285,10 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                 <p className="text-sm text-gray-600">{lead.email}</p>
                 <p className="text-sm text-gray-600">{lead.phone}</p>
               </div>
-              <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full ${
-                lead.status === 'New'
+              <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full ${lead.status === 'New'
                   ? 'bg-yellow-100 text-yellow-800'
                   : 'bg-green-100 text-green-800'
-              }`}>
+                }`}>
                 {lead.status}
               </span>
             </div>
@@ -299,8 +296,8 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
             {lead.message && (
               <div className="mb-3">
                 <p className="text-sm text-gray-700">
-                  {expandedRows.has(lead.id) ? lead.message : 
-                   lead.message.length > 100 ? `${lead.message.substring(0, 100)}...` : lead.message}
+                  {expandedRows.has(lead.id) ? lead.message :
+                    lead.message.length > 100 ? `${lead.message.substring(0, 100)}...` : lead.message}
                 </p>
                 {lead.message.length > 100 && (
                   <button
@@ -330,11 +327,10 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
             <div className="flex gap-2">
               <button
                 onClick={() => handleStatusUpdate(lead.id)}
-                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${
-                  lead.status === 'New'
+                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${lead.status === 'New'
                     ? 'bg-green-100 text-green-700 hover:bg-green-200'
                     : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
-                }`}
+                  }`}
               >
                 <FaCheckCircle className="inline mr-1" />
                 {lead.status === 'New' ? 'Mark Contacted' : 'Mark New'}

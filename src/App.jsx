@@ -1,5 +1,4 @@
-import {BrowserRouter , Routes , Route} from 'react-router-dom';
-import LeadForm from './components/leadForm/LeadForm';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ShowLeads from './components/showLeads/ShowLeads';
 import LeadsPage from './pages/LeadsPage';
 
@@ -10,11 +9,15 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<LeadForm/>}/>
-        <Route path='/showLeads' element={<ShowLeads/>}/>
-        <Route path='/leads' element={<LeadsPage/>}/>
-      </Routes>
+        <Routes>
+          <Route path='/' element={<LeadsPage />} />
+          <Route path='/leads' element={<LeadsPage />} />
+          {/* Legacy routes redirect to new module */}
+          <Route path='/showLeads' element={<Navigate to="/leads" replace />} />
+          <Route path='/legacy-form' element={<Navigate to="/leads" replace />} />
+          {/* Fallback */}
+          <Route path='*' element={<Navigate to="/leads" replace />} />
+        </Routes>
       </BrowserRouter>
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />
     </>

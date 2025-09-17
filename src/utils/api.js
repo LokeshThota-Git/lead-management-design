@@ -18,7 +18,7 @@ const shouldFail = () => Math.random() < 0.1;
  */
 export const postLead = async (lead) => {
   await delay(1500); // Simulate network latency
-  
+
   if (shouldFail()) {
     throw new Error('Network error. Please check your connection and try again.');
   }
@@ -40,7 +40,8 @@ export const postLead = async (lead) => {
     const savedLeads = savedLeadsRaw ? JSON.parse(savedLeadsRaw) : [];
     const updatedLeads = [response.data, ...savedLeads];
     localStorage.setItem('leads', JSON.stringify(updatedLeads));
-  } catch (_) {
+  } catch (e) {
+    console.error('Failed to save lead to localStorage', e);
     // If localStorage is unavailable, we still return success so UI state updates
   }
 
@@ -54,7 +55,7 @@ export const postLead = async (lead) => {
  */
 export const fetchLeads = async (params = {}) => {
   await delay(1000); // Simulate network latency
-  
+
   if (shouldFail()) {
     throw new Error('Failed to fetch leads. Please try again.');
   }
@@ -124,7 +125,7 @@ export const fetchLeads = async (params = {}) => {
  */
 export const updateLead = async (leadId, updates) => {
   await delay(800); // Simulate network latency
-  
+
   if (shouldFail()) {
     throw new Error('Failed to update lead. Please try again.');
   }
@@ -164,7 +165,7 @@ export const updateLead = async (leadId, updates) => {
  */
 export const deleteLead = async (leadId) => {
   await delay(600); // Simulate network latency
-  
+
   if (shouldFail()) {
     throw new Error('Failed to delete lead. Please try again.');
   }
@@ -200,7 +201,7 @@ export const deleteLead = async (leadId) => {
  */
 export const bulkOperation = async (leadIds, operation) => {
   await delay(2000); // Simulate longer processing time
-  
+
   if (shouldFail()) {
     throw new Error(`Failed to perform ${operation}. Please try again.`);
   }

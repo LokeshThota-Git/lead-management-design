@@ -118,24 +118,6 @@ This project implements a complete frontend-only Lead Management Module with:
 - **Accessibility**: Keyboard navigation and screen reader support
 - **Mobile Optimization**: Touch-friendly interface
 
-## 📁 Project Structure
-
-```
-src/
-├── components/
-│   ├── LeadForm.jsx          # Lead capture form
-│   ├── LeadList.jsx          # Lead list with search/sort
-│   ├── EmptyState.jsx        # Empty state component
-│   ├── Toast.jsx             # Custom toast component
-│   └── LoadingSkeleton.jsx   # Loading state component
-├── pages/
-│   └── LeadsPage.jsx         # Main page with tab navigation
-├── utils/
-│   └── api.js                # Mock API functions
-├── App.jsx                   # Main app with routing
-└── index.css                 # Global styles and animations
-```
-
 ## 🎨 Glassmorphism Implementation
 
 ### Key Tailwind Classes Used
@@ -204,7 +186,7 @@ See `TEST_CHECKLIST.md` for comprehensive testing scenarios including:
 
 ### Build for Production
 ```bash
-npm run build
+npm run build 
 ```
 
 ### Deploy to Static Hosting

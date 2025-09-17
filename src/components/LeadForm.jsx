@@ -32,11 +32,15 @@ export default function LeadForm({ onLeadAdded }) {
       case 'name':
         return value.trim() === '' ? 'Name is required' : '';
       case 'email':
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return !emailRegex.test(value) ? 'Please enter a valid email address' : '';
+        {
+          const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          return !emailRegex.test(value) ? 'Please enter a valid email address' : '';
+        }
       case 'phone':
-        const phoneRegex = /^\d{7,15}$/;
-        return !phoneRegex.test(value.replace(/\D/g, '')) ? 'Phone must be 7-15 digits' : '';
+        {
+          const phoneRegex = /^\d{7,15}$/;
+          return !phoneRegex.test(value.replace(/\D/g, '')) ? 'Phone must be 7-15 digits' : '';
+        }
       case 'message':
         return value.length > 500 ? 'Message must be 500 characters or less' : '';
       default:
