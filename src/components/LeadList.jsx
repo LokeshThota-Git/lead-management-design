@@ -185,9 +185,9 @@ export default function LeadList({ leads, onLeadUpdated, onLeadDeleted, loading 
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/10">
+            <tbody className="divide-y divide-gray-300">
               {filteredAndSortedLeads.map((lead, index) => (
-                <tr key={lead.id} className="hover:bg-white/5 transition-all duration-200 hover:scale-[1.01]" style={{ animationDelay: `${index * 0.1}s` }}>
+                <tr key={lead.id} className="hover:bg-gray-200 transition-all duration-200 hover:scale-[1.01]" style={{ animationDelay: `${index * 0.1}s` }}>
                   <td className="px-6 py-4 text-sm text-gray-900 font-medium">
                     {lead.name}
                   </td>

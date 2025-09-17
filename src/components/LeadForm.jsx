@@ -51,7 +51,7 @@ export default function LeadForm({ onLeadAdded }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -75,7 +75,7 @@ export default function LeadForm({ onLeadAdded }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -87,7 +87,7 @@ export default function LeadForm({ onLeadAdded }) {
 
     try {
       const response = await postLead(formData);
-      
+
       if (response.success) {
         onLeadAdded(response.data);
         setFormData({ name: '', email: '', phone: '', message: '' });
@@ -96,7 +96,7 @@ export default function LeadForm({ onLeadAdded }) {
       } else {
         throw new Error(response.message || 'Failed to add lead');
       }
-      
+
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -124,9 +124,8 @@ export default function LeadForm({ onLeadAdded }) {
             value={formData.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${
-              errors.name ? 'border-red-300' : 'border-white/10'
-            }`}
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${errors.name ? 'border-red-300' : 'border-gray-300'
+              }`}
             placeholder="Enter full name"
           />
           {errors.name && (
@@ -146,9 +145,7 @@ export default function LeadForm({ onLeadAdded }) {
             value={formData.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${
-              errors.email ? 'border-red-300' : 'border-white/10'
-            }`}
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${errors.email ? 'border-red-300' : 'border-gray-300'}`}
             placeholder="Enter email address"
           />
           {errors.email && (
@@ -168,9 +165,8 @@ export default function LeadForm({ onLeadAdded }) {
             value={formData.phone}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${
-              errors.phone ? 'border-red-300' : 'border-white/10'
-            }`}
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${errors.phone ? 'border-red-300' : 'border-gray-300'
+              }`}
             placeholder="Enter phone number (7-15 digits)"
           />
           {errors.phone && (
@@ -190,9 +186,8 @@ export default function LeadForm({ onLeadAdded }) {
             onChange={handleChange}
             onBlur={handleBlur}
             rows={4}
-            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring resize-none ${
-              errors.message ? 'border-red-300' : 'border-white/10'
-            }`}
+            className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring resize-none ${errors.message ? 'border-red-300' : 'border-gray-300'
+              }`}
             placeholder="Enter any additional message or notes"
           />
           <div className="flex justify-between mt-1">
@@ -209,7 +204,7 @@ export default function LeadForm({ onLeadAdded }) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="w-full bg-gradient-to-r from-blue-500 to-violet-900 text-white py-3 px-6 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
           {isSubmitting ? (
             <>
