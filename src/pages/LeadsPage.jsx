@@ -82,7 +82,7 @@ export default function LeadsPage() {
             <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-2 flex gap-2">
               <button
                 onClick={() => setActiveTab('form')}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-200 ${
+                className={`flex items-center gap-2 px-6 py-3 cursor-pointer rounded-xl transition-all duration-200 ${
                   activeTab === 'form'
                     ? 'bg-white/30 text-blue-700 shadow-lg'
                     : 'text-gray-600 hover:bg-white/20'
@@ -93,7 +93,7 @@ export default function LeadsPage() {
               </button>
               <button
                 onClick={() => setActiveTab('list')}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-200 ${
+                className={`flex items-center gap-2 px-6 py-3 cursor-pointer rounded-xl transition-all duration-200 ${
                   activeTab === 'list'
                     ? 'bg-white/30 text-blue-700 shadow-lg'
                     : 'text-gray-600 hover:bg-white/20'

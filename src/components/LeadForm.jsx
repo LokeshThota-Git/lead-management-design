@@ -167,7 +167,7 @@ export default function LeadForm({ onLeadAdded }) {
             onBlur={handleBlur}
             className={`w-full px-4 py-3 bg-white/6 backdrop-blur-sm border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:scale-105 focus-ring ${errors.phone ? 'border-red-300' : 'border-gray-300'
               }`}
-            placeholder="Enter phone number (7-15 digits)"
+            placeholder="Enter phone number"
           />
           {errors.phone && (
             <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
