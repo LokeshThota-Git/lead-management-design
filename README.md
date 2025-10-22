@@ -221,10 +221,6 @@ git log --oneline -5
 - Email integration
 - Lead assignment and team management
 
-## 📄 License
-
-This project is part of a frontend development assessment and is for demonstration purposes.
-
 ---
 
 **Built with ❤️ using React, Tailwind CSS, and modern web development practices.**
